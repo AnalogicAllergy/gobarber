@@ -4,6 +4,7 @@ import 'package:gobarber/components/composite_button.dart';
 import 'package:gobarber/components/orange_button.dart';
 import 'package:gobarber/components/text_field.dart';
 import 'package:gobarber/pages/main_logged.dart';
+import 'package:gobarber/pages/register.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:supercharged/supercharged.dart';
 
@@ -85,7 +86,10 @@ class LoginScreen extends StatelessWidget {
               child: CompositeButton(
                 buttonText: "Criar uma conta",
                 onPressed: () {
-                  print("Criar uma conta");
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => RegisterScreen()));
                 },
                 icon: Icon(
                   Icons.exit_to_app,
