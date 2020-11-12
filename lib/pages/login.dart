@@ -85,6 +85,7 @@ class LoginScreen extends StatelessWidget {
               alignment: Alignment.bottomCenter,
               child: CompositeButton(
                 buttonText: "Criar uma conta",
+                textColor: '#FF9000'.toColor(),
                 onPressed: () {
                   Navigator.push(
                       context,

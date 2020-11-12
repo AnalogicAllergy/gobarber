@@ -6,8 +6,10 @@ class CompositeButton extends StatelessWidget {
   final String buttonText;
   final VoidCallback onPressed;
   final Icon icon;
+  final Color textColor;
 
-  const CompositeButton({Key key, this.buttonText, this.onPressed, this.icon})
+  const CompositeButton(
+      {Key key, this.buttonText, this.onPressed, this.icon, this.textColor})
       : super(key: key);
 
   @override
@@ -28,9 +30,7 @@ class CompositeButton extends StatelessWidget {
             Text(
               "$buttonText",
               style: GoogleFonts.robotoSlab(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                  color: '#FF9000'.toColor()),
+                  fontSize: 16, fontWeight: FontWeight.w500, color: textColor),
             ),
           ],
         )),

@@ -85,14 +85,15 @@ class RegisterScreen extends StatelessWidget {
             Align(
               alignment: Alignment.bottomCenter,
               child: CompositeButton(
+                textColor: Colors.white,
                 buttonText: "Voltar para o login",
                 onPressed: () {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => LoginScreen()));
                 },
                 icon: Icon(
-                  Icons.exit_to_app,
-                  color: '#FF9000'.toColor(),
+                  Icons.arrow_back,
+                  color: Colors.white,
                 ),
               ),
             )
