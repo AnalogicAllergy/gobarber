@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:gobarber/pages/login.dart';
 import 'package:splashscreen/splashscreen.dart';
@@ -55,9 +56,19 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+
   @override
   Widget build(BuildContext context) {
-    return _introScreen();
+    return FutureBuilder(
+        future: _initialization,
+        builder: (context, snapshot) {
+          if (snapshot.hasError) print("Erro encontrado ao setar o firebase");
+          if (snapshot.connectionState == ConnectionState.done) {
+            return _introScreen();
+          } else
+            return CircularProgressIndicator();
+        });
   }
 
   Widget _introScreen() {

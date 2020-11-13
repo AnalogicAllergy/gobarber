@@ -10,7 +10,8 @@ class CustomTextField extends StatelessWidget {
       this.textInputType,
       this.onChanged,
       this.enabled,
-      this.controller});
+      this.controller,
+      this.errorText});
 
   final TextEditingController controller;
   final String hint;
@@ -20,13 +21,14 @@ class CustomTextField extends StatelessWidget {
   final TextInputType textInputType;
   final Function(String) onChanged;
   final bool enabled;
+  final String errorText;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(left: 8, right: 8),
       width: 295,
-      height: 50,
+      height: 60,
       decoration: BoxDecoration(
         shape: BoxShape.rectangle,
         color: '#232129'.toColor(),
@@ -39,9 +41,10 @@ class CustomTextField extends StatelessWidget {
         keyboardType: textInputType,
         onChanged: onChanged,
         enabled: enabled,
-        //not working
+        style: TextStyle(color: Colors.white),
         decoration: InputDecoration(
           hintText: hint,
+          errorText: errorText,
           hintStyle: TextStyle(color: '#666360'.toColor()),
           border: InputBorder.none,
           prefixIcon: prefix,
