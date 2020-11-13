@@ -35,6 +35,7 @@ class RegisterScreen extends StatelessWidget {
               style: GoogleFonts.robotoSlab(
                   fontSize: 28, color: '#F4EDE8'.toColor()),
             ),
+            //TODO rever o esquema de cores do errorText - cinza x vermelho nao esta legal
             Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
