@@ -83,7 +83,7 @@ class RegisterScreen extends StatelessWidget {
                           controller: _passwordController,
                           prefix: Icon(
                             Icons.lock_outline,
-                            // todo move the colors definitions to a helper class
+                            // TODO move the colors definitions to a helper class
                             color: '#666360'.toColor(),
                           ),
                           obscure: true,
@@ -98,7 +98,7 @@ class RegisterScreen extends StatelessWidget {
                         disabledText: "Aguardando...",
                         enabled: registerUserStore.isFormValid,
                         onPressed: () {
-                          //todo save user data on firestore = {uid and name};
+                          //TODO save user data on firestore = {uid and name};
                           context.read<AuthenticationService>().signUp(
                               email: registerUserStore.email,
                               password: registerUserStore.password);
