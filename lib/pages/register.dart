@@ -6,9 +6,11 @@ import 'package:gobarber/components/orange_button.dart';
 import 'package:gobarber/components/text_field.dart';
 import 'package:gobarber/pages/login.dart';
 import 'package:gobarber/pages/main_logged.dart';
+import 'package:gobarber/services/authentication_service.dart';
 import 'package:gobarber/stores/register_user_store.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:supercharged/supercharged.dart';
+import 'package:provider/provider.dart';
 
 class RegisterScreen extends StatelessWidget {
   TextEditingController _nameController = TextEditingController();
@@ -81,6 +83,7 @@ class RegisterScreen extends StatelessWidget {
                           controller: _passwordController,
                           prefix: Icon(
                             Icons.lock_outline,
+                            // todo move the colors definitions to a helper class
                             color: '#666360'.toColor(),
                           ),
                           obscure: true,
@@ -95,11 +98,10 @@ class RegisterScreen extends StatelessWidget {
                         disabledText: "Aguardando...",
                         enabled: registerUserStore.isFormValid,
                         onPressed: () {
-                          print("Cadastrar");
-                          print("DADOS DO USUARIO");
-                          print(registerUserStore.name);
-                          print(registerUserStore.email);
-                          print(registerUserStore.password);
+                          //todo save user data on firestore = {uid and name};
+                          context.read<AuthenticationService>().signUp(
+                              email: registerUserStore.email,
+                              password: registerUserStore.password);
                           // Navigator.push(context,
                           //     MaterialPageRoute(builder: (context) => MainLogged()));
                         },
@@ -109,7 +111,7 @@ class RegisterScreen extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 150,
             ),
             Align(
@@ -121,7 +123,7 @@ class RegisterScreen extends StatelessWidget {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => LoginScreen()));
                 },
-                icon: Icon(
+                icon: const Icon(
                   Icons.arrow_back,
                   color: Colors.white,
                 ),

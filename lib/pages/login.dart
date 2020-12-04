@@ -1,18 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gobarber/components/composite_button.dart';
 import 'package:gobarber/components/orange_button.dart';
 import 'package:gobarber/components/text_field.dart';
 import 'package:gobarber/pages/main_logged.dart';
 import 'package:gobarber/pages/register.dart';
+import 'package:gobarber/services/authentication_service.dart';
+import 'package:gobarber/stores/login_store.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:provider/provider.dart';
 import 'package:supercharged/supercharged.dart';
 
 class LoginScreen extends StatelessWidget {
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+  LoginStore _loginStore = LoginStore();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: '#312E38'.toColor(),
+        resizeToAvoidBottomPadding: false,
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -33,43 +43,62 @@ class LoginScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 // crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: CustomTextField(
-                        hint: "Email",
-                        prefix: Icon(
-                          Icons.mail_outline,
-                          color: '#666360'.toColor(),
+                  Observer(builder: (_) {
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: CustomTextField(
+                          hint: "Email",
+                          controller: _emailController,
+                          onChanged: _loginStore.changeEmail,
+                          errorText: _loginStore.validateEmail(),
+                          prefix: Icon(
+                            Icons.mail_outline,
+                            color: '#666360'.toColor(),
+                          ),
+                          textInputType: TextInputType.text),
+                    );
+                  }),
+                  Observer(
+                    builder: (_) {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: CustomTextField(
+                          hint: "Senha",
+                          controller: _passwordController,
+                          onChanged: _loginStore.changePassword,
+                          errorText: _loginStore.validatePassword(),
+                          prefix: Icon(
+                            Icons.lock_outline,
+                            color: '#666360'.toColor(),
+                          ),
+                          textInputType: TextInputType.text,
+                          obscure: true,
                         ),
-                        textInputType: TextInputType.text),
+                      );
+                    },
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: CustomTextField(
-                      hint: "Senha",
-                      prefix: Icon(
-                        Icons.lock_outline,
-                        color: '#666360'.toColor(),
-                      ),
-                      textInputType: TextInputType.text,
-                      obscure: true,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: OrangeButton(
-                      enabled: true,
-                      buttonText: "Entrar",
-                      onPressed: () {
-                        print("Entrar");
-                        // Navigator.push(context,
-                        //     MaterialPageRoute(builder: (context) => MainLogged()));
-                      },
-                    ),
+                    child: Observer(builder: (_) {
+                      return OrangeButton(
+                          enabled: _loginStore.isFormValid,
+                          buttonText: "Entrar",
+                          disabledText: "Aguardando dados",
+                          onPressed: _loginStore.isFormValid
+                              ? () {
+                                  debugPrint('Clicked');
+                                  context.read<AuthenticationService>().signIn(
+                                      email: _loginStore.email,
+                                      password: _loginStore.password);
+                                  // Navigator.push(context,
+                                  //     MaterialPageRoute(builder: (context) => MainLogged()));
+                                }
+                              : null);
+                    }),
                   ),
                   GestureDetector(
                       onTap: () {
-                        print("Esqueci a senha");
+                        debugPrint("Esqueci a senha");
                       },
                       child: Text("Esqueci a senha",
                           style: GoogleFonts.robotoSlab(
@@ -79,7 +108,7 @@ class LoginScreen extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 150,
             ),
             Align(

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'register_user_store.dart';
+part of 'login_store.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,31 +8,16 @@ part of 'register_user_store.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$RegisterUserStore on _RegisterUserStoreBase, Store {
+mixin _$LoginStore on _LoginStoreBase, Store {
   Computed<bool> _$isFormValidComputed;
 
   @override
   bool get isFormValid =>
       (_$isFormValidComputed ??= Computed<bool>(() => super.isFormValid,
-              name: '_RegisterUserStoreBase.isFormValid'))
+              name: '_LoginStoreBase.isFormValid'))
           .value;
 
-  final _$nameAtom = Atom(name: '_RegisterUserStoreBase.name');
-
-  @override
-  String get name {
-    _$nameAtom.reportRead();
-    return super.name;
-  }
-
-  @override
-  set name(String value) {
-    _$nameAtom.reportWrite(value, super.name, () {
-      super.name = value;
-    });
-  }
-
-  final _$emailAtom = Atom(name: '_RegisterUserStoreBase.email');
+  final _$emailAtom = Atom(name: '_LoginStoreBase.email');
 
   @override
   String get email {
@@ -47,7 +32,7 @@ mixin _$RegisterUserStore on _RegisterUserStoreBase, Store {
     });
   }
 
-  final _$passwordAtom = Atom(name: '_RegisterUserStoreBase.password');
+  final _$passwordAtom = Atom(name: '_LoginStoreBase.password');
 
   @override
   String get password {
@@ -62,24 +47,34 @@ mixin _$RegisterUserStore on _RegisterUserStoreBase, Store {
     });
   }
 
-  final _$_RegisterUserStoreBaseActionController =
-      ActionController(name: '_RegisterUserStoreBase');
+  final _$_LoginStoreBaseActionController =
+      ActionController(name: '_LoginStoreBase');
 
   @override
-  dynamic changeName(String value) {
-    final _$actionInfo = _$_RegisterUserStoreBaseActionController.startAction(
-        name: '_RegisterUserStoreBase.changeName');
+  dynamic changeEmail(String value) {
+    final _$actionInfo = _$_LoginStoreBaseActionController.startAction(
+        name: '_LoginStoreBase.changeEmail');
     try {
-      return super.changeName(value);
+      return super.changeEmail(value);
     } finally {
-      _$_RegisterUserStoreBaseActionController.endAction(_$actionInfo);
+      _$_LoginStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic changePassword(String value) {
+    final _$actionInfo = _$_LoginStoreBaseActionController.startAction(
+        name: '_LoginStoreBase.changePassword');
+    try {
+      return super.changePassword(value);
+    } finally {
+      _$_LoginStoreBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   String toString() {
     return '''
-name: ${name},
 email: ${email},
 password: ${password},
 isFormValid: ${isFormValid}
