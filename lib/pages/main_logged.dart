@@ -15,6 +15,7 @@ class MainLogged extends StatelessWidget {
 
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomPadding: false,
         backgroundColor: '#312E38'.toColor(),
         body: Column(
           children: [
@@ -44,13 +45,12 @@ class MainLogged extends StatelessWidget {
                       height: 75,
                       width: 75,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(37.5),
-                      ),
-                      child: CachedNetworkImage(
-                          fit: BoxFit.cover,
-                          imageUrl:
-                              'https://www.planetware.com/wpimages/2020/02/france-in-pictures-beautiful-places-to-photograph-eiffel-tower.jpg'),
-                    )
+                          borderRadius: BorderRadius.circular(37.5),
+                          image: DecorationImage(
+                              image: NetworkImage(
+                                  'https://scontent.fbsb14-1.fna.fbcdn.net/v/t1.0-9/120108010_933365460487064_6430574191358905958_o.jpg?_nc_cat=105&ccb=2&_nc_sid=09cbfe&_nc_ohc=WPwKswztl3wAX-x3XZk&_nc_ht=scontent.fbsb14-1.fna&oh=cdb41ad918036de28f29f8877e462c23&oe=5FF42199'),
+                              fit: BoxFit.cover)),
+                    ),
                   ],
                 ),
               ),
@@ -58,7 +58,6 @@ class MainLogged extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text("Cabeleireiros",
                       style: GoogleFonts.robotoSlab(
@@ -66,34 +65,52 @@ class MainLogged extends StatelessWidget {
                 ],
               ),
             ),
-            ListView(
-              shrinkWrap: true,
-              children: [
-                buildBarberCard(
-                    days: 'Segunda a Sexta',
-                    hours: '8h as 18h',
-                    imgUrl:
-                        'https://i.ytimg.com/vi/Be-IWz7Q2rM/maxresdefault.jpg',
-                    name: 'Barber King'),
-                buildBarberCard(
-                    days: 'Segunda a Sexta',
-                    hours: '8h as 18h',
-                    imgUrl:
-                        'https://i.ytimg.com/vi/Be-IWz7Q2rM/maxresdefault.jpg',
-                    name: 'Barber King'),
-                buildBarberCard(
-                    days: 'Segunda a Sexta',
-                    hours: '8h as 18h',
-                    imgUrl:
-                        'https://i.ytimg.com/vi/Be-IWz7Q2rM/maxresdefault.jpg',
-                    name: 'Barber King'),
-                buildBarberCard(
-                    days: 'Segunda a Sexta',
-                    hours: '8h as 18h',
-                    imgUrl:
-                        'https://i.ytimg.com/vi/Be-IWz7Q2rM/maxresdefault.jpg',
-                    name: 'Barber King')
-              ],
+            /**
+             * A widget that expands a child of a Row, Column, or Flex 
+             * so that the child fills the available space.
+             */
+            Expanded(
+              child: ListView(
+                shrinkWrap: true,
+                children: [
+                  buildBarberCard(
+                      days: 'Segunda a Sexta',
+                      hours: '8h as 18h',
+                      imgUrl:
+                          'https://i.ytimg.com/vi/Be-IWz7Q2rM/maxresdefault.jpg',
+                      name: 'Barber King'),
+                  buildBarberCard(
+                      days: 'Segunda a Sexta',
+                      hours: '8h as 18h',
+                      imgUrl:
+                          'https://images.wisegeek.com/woman-at-salon-flat-iron.jpg',
+                      name: 'Maria'),
+                  buildBarberCard(
+                      days: 'Segunda a Sexta',
+                      hours: '8h as 18h',
+                      imgUrl:
+                          'https://cordeiropolis.corderovirtual.com.br/foto_maior/17535/hair-stylist-michel-lopes-e-considerado-grande-destaque-no-mercado-da-beleza-20200919045232.jpg',
+                      name: 'Michael'),
+                  buildBarberCard(
+                      days: 'Segunda a Quarta',
+                      hours: '8h as 14h',
+                      imgUrl:
+                          'https://todateen.uol.com.br/wp-content/uploads/2017/10/larissa-manoela-2.jpg',
+                      name: 'Bob'),
+                  buildBarberCard(
+                      days: 'Segunda a Quinta',
+                      hours: '8h as 12h',
+                      imgUrl:
+                          'https://www.patriciacarvalho.com.br/wp-content/uploads/2016/10/hairstylist.jpg',
+                      name: 'Patrícia'),
+                  buildBarberCard(
+                      days: 'Segunda a Quinta',
+                      hours: '8h as 12h',
+                      imgUrl:
+                          'https://www.patriciacarvalho.com.br/wp-content/uploads/2016/10/hairstylist.jpg',
+                      name: 'Patrícia')
+                ],
+              ),
             )
           ],
         ),
@@ -107,59 +124,64 @@ class MainLogged extends StatelessWidget {
       @required String hours,
       @required String imgUrl}) {
     return Padding(
-      padding: const EdgeInsets.all(24),
+      padding: const EdgeInsets.all(8),
       child: Card(
         elevation: 1,
         color: '#3E3B47'.toColor(),
         child: Container(
-            height: 112,
-            width: 320,
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
-            child: Row(
-              children: [
-                Container(
-                  height: 75,
-                  width: 75,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(37.5),
-                      image: DecorationImage(
-                          image: NetworkImage(imgUrl), fit: BoxFit.cover)),
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(name,
-                        style: GoogleFonts.robotoSlab(
-                            fontSize: 18,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold)),
-                    Row(
-                      children: [
-                        Icon(Icons.calendar_today, color: '#FF9000'.toColor()),
-                        SizedBox(width: 10),
-                        Text(days,
-                            style: GoogleFonts.robotoSlab(
-                                color: '#999591'.toColor(), fontSize: 12))
-                      ],
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      children: [
-                        Icon(Icons.schedule, color: '#FF9000'.toColor()),
-                        SizedBox(width: 10),
-                        Text(hours,
-                            style: GoogleFonts.robotoSlab(
-                                color: '#999591'.toColor(), fontSize: 12))
-                      ],
-                    )
-                  ],
-                )
-              ],
+            height: 120,
+            width: 240,
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(40)),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Container(
+                    height: 75,
+                    width: 75,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(37.5),
+                        image: DecorationImage(
+                            image: NetworkImage(imgUrl), fit: BoxFit.cover)),
+                  ),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(name,
+                          style: GoogleFonts.robotoSlab(
+                              fontSize: 24,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold)),
+                      const SizedBox(height: 5),
+                      Row(
+                        children: [
+                          Icon(Icons.calendar_today,
+                              color: '#FF9000'.toColor()),
+                          SizedBox(width: 10),
+                          Text(days,
+                              style: GoogleFonts.robotoSlab(
+                                  color: '#999591'.toColor(), fontSize: 16))
+                        ],
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Row(
+                        children: [
+                          Icon(Icons.schedule, color: '#FF9000'.toColor()),
+                          SizedBox(width: 10),
+                          Text(hours,
+                              style: GoogleFonts.robotoSlab(
+                                  color: '#999591'.toColor(), fontSize: 16))
+                        ],
+                      )
+                    ],
+                  )
+                ],
+              ),
             )),
       ),
     );
