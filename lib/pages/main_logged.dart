@@ -73,6 +73,7 @@ class MainLogged extends StatelessWidget {
               child: ListView(
                 shrinkWrap: true,
                 children: [
+                  //TODO criar uma colecao de barbeiros no firestore e consumir aqui - remover MOCK.
                   buildBarberCard(
                       days: 'Segunda a Sexta',
                       hours: '8h as 18h',
