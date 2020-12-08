@@ -7,6 +7,7 @@ import 'package:gobarber/components/text_field.dart';
 import 'package:gobarber/pages/login.dart';
 import 'package:gobarber/pages/main_logged.dart';
 import 'package:gobarber/services/authentication_service.dart';
+import 'package:gobarber/services/firestore_service.dart';
 import 'package:gobarber/stores/register_user_store.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:supercharged/supercharged.dart';
@@ -102,6 +103,15 @@ class RegisterScreen extends StatelessWidget {
                           context.read<AuthenticationService>().signUp(
                               email: registerUserStore.email,
                               password: registerUserStore.password);
+                          // get current user
+                          final currentUser = context
+                              .read<AuthenticationService>()
+                              .getCurrentUser();
+                          //saving current user to firestore
+                          context.read<FirestoreService>().saveCurrentUser(
+                              currentUser: currentUser,
+                              name: registerUserStore.name);
+
                           // Navigator.push(context,
                           //     MaterialPageRoute(builder: (context) => MainLogged()));
                         },

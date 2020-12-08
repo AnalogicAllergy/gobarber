@@ -10,7 +10,6 @@ import 'package:gobarber/services/authentication_service.dart';
 import 'package:gobarber/stores/login_store.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:provider/provider.dart';
 import 'package:supercharged/supercharged.dart';
 
 class LoginScreen extends StatelessWidget {
