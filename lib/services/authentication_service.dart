@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:gobarber/utils/auth_errors.dart';
 
 class AuthenticationService {
   final FirebaseAuth _firebaseAuth;
@@ -12,7 +13,7 @@ class AuthenticationService {
           email: email, password: password);
       return "Signed in successfully";
     } on FirebaseAuthException catch (firebaseAuthException) {
-      return firebaseAuthException.message;
+      return AuthErrors.show(firebaseAuthException.code);
     }
   }
 
@@ -22,7 +23,7 @@ class AuthenticationService {
           email: email, password: password);
       return "Signed up successfully";
     } on FirebaseAuthException catch (firebaseAuthException) {
-      return firebaseAuthException.message;
+      return AuthErrors.show(firebaseAuthException.code);
     }
   }
 

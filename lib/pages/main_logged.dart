@@ -5,6 +5,7 @@ import 'package:gobarber/services/authentication_service.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:supercharged/supercharged.dart';
+import 'package:logger/logger.dart';
 
 class MainLogged extends StatelessWidget {
   @override
@@ -12,7 +13,7 @@ class MainLogged extends StatelessWidget {
     final firebaseUser = context.watch<User>();
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
-
+    final logger = Logger();
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomPadding: false,
@@ -41,15 +42,21 @@ class MainLogged extends StatelessWidget {
                                 color: '#FF9000'.toColor()))
                       ],
                     ),
-                    Container(
-                      height: 75,
-                      width: 75,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(37.5),
-                          image: DecorationImage(
-                              image: NetworkImage(
-                                  'https://scontent.fbsb14-1.fna.fbcdn.net/v/t1.0-9/120108010_933365460487064_6430574191358905958_o.jpg?_nc_cat=105&ccb=2&_nc_sid=09cbfe&_nc_ohc=WPwKswztl3wAX-x3XZk&_nc_ht=scontent.fbsb14-1.fna&oh=cdb41ad918036de28f29f8877e462c23&oe=5FF42199'),
-                              fit: BoxFit.cover)),
+                    GestureDetector(
+                      onTap: () {
+                        //TODO abrir a profile page
+                        logger.i("Clicked on profile page");
+                      },
+                      child: Container(
+                        height: 56,
+                        width: 56,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(28),
+                            image: DecorationImage(
+                                image: NetworkImage(
+                                    'https://scontent.fbsb14-1.fna.fbcdn.net/v/t1.0-9/120108010_933365460487064_6430574191358905958_o.jpg?_nc_cat=105&ccb=2&_nc_sid=09cbfe&_nc_ohc=WPwKswztl3wAX-x3XZk&_nc_ht=scontent.fbsb14-1.fna&oh=cdb41ad918036de28f29f8877e462c23&oe=5FF42199'),
+                                fit: BoxFit.cover)),
+                      ),
                     ),
                   ],
                 ),
@@ -108,8 +115,8 @@ class MainLogged extends StatelessWidget {
                       days: 'Segunda a Quinta',
                       hours: '8h as 12h',
                       imgUrl:
-                          'https://www.patriciacarvalho.com.br/wp-content/uploads/2016/10/hairstylist.jpg',
-                      name: 'Patrícia')
+                          'https://a9p9n2x2.stackpathcdn.com/wp-content/blogs.dir/1/files/2020/03/barbershop-e1583544536263.png',
+                      name: 'Marcos')
                 ],
               ),
             )
