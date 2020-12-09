@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:gobarber/pages/profile.dart';
 import 'package:gobarber/services/authentication_service.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -45,7 +46,8 @@ class MainLogged extends StatelessWidget {
                     GestureDetector(
                       onTap: () {
                         //TODO abrir a profile page
-                        logger.i("Clicked on profile page");
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => ProfilePage()));
                       },
                       child: Container(
                         height: 56,

@@ -32,6 +32,7 @@ dependencies:
   flutter_mobx: ^1.1.0+2
   flutter_svg: ^0.19.1
   google_fonts: null
+  image_picker: ^0.6.7+14
   lint: ^1.2.0
   logger: ^0.9.4
   mobx: ^1.2.1+4
