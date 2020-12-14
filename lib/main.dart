@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:gobarber/pages/login.dart';
 import 'package:gobarber/pages/main_logged.dart';
 import 'package:gobarber/services/firestore_service.dart';
+import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'package:supercharged/supercharged.dart';
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
         title: 'Página Inicial',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.orange,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         home: AuthenticationWrapper(),
@@ -54,7 +55,9 @@ class AuthenticationWrapper extends StatelessWidget {
     final firebaseUser = context.watch<User>();
     Widget screen;
     firebaseUser != null ? screen = MainLogged() : screen = LoginScreen();
-
+    Logger logger = Logger();
+    logger.d("User on log is");
+    logger.i(firebaseUser);
     return Scaffold(
         body: Stack(
       children: [

@@ -14,9 +14,9 @@ import 'package:supercharged/supercharged.dart';
 import 'package:provider/provider.dart';
 
 class RegisterScreen extends StatelessWidget {
-  TextEditingController _nameController = TextEditingController();
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   final RegisterUserStore registerUserStore = RegisterUserStore();
   @override
   Widget build(BuildContext context) {
@@ -112,8 +112,10 @@ class RegisterScreen extends StatelessWidget {
                               currentUser: currentUser,
                               name: registerUserStore.name);
 
-                          // Navigator.push(context,
-                          //     MaterialPageRoute(builder: (context) => MainLogged()));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => MainLogged()));
                         },
                       ),
                     );

@@ -7,8 +7,10 @@ import 'package:gobarber/components/text_field.dart';
 import 'package:gobarber/pages/main_logged.dart';
 import 'package:gobarber/pages/register.dart';
 import 'package:gobarber/services/authentication_service.dart';
+import 'package:gobarber/services/firestore_service.dart';
 import 'package:gobarber/stores/login_store.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 import 'package:supercharged/supercharged.dart';
 
@@ -16,7 +18,7 @@ class LoginScreen extends StatelessWidget {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   LoginStore _loginStore = LoginStore();
-
+  Logger _logger = Logger();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,19 +87,28 @@ class LoginScreen extends StatelessWidget {
                           disabledText: "Aguardando dados",
                           onPressed: _loginStore.isFormValid
                               ? () {
-                                  debugPrint('Clicked');
+                                  _logger.d('Clicked');
                                   context.read<AuthenticationService>().signIn(
                                       email: _loginStore.email,
                                       password: _loginStore.password);
-                                  // Navigator.push(context,
-                                  //     MaterialPageRoute(builder: (context) => MainLogged()));
+                                  final user = context
+                                      .read<AuthenticationService>()
+                                      .getCurrentUser();
+
+                                  if (user != null) {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                MainLogged()));
+                                  }
                                 }
                               : null);
                     }),
                   ),
                   GestureDetector(
                       onTap: () {
-                        debugPrint("Esqueci a senha");
+                        _logger.d("Esqueci a senha");
                       },
                       child: Text("Esqueci a senha",
                           style: GoogleFonts.robotoSlab(

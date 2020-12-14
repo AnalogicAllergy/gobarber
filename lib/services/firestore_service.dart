@@ -3,11 +3,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gobarber/models/user_model.dart';
+import 'package:logger/logger.dart';
 
 class FirestoreService {
   final FirebaseFirestore _firestore;
   FirestoreService(this._firestore);
   String collectionName = "gobarber_users";
+  Logger logger = Logger();
   Future<void> saveCurrentUser(
       {@required String name, @required User currentUser}) async {
     try {
@@ -16,7 +18,7 @@ class FirestoreService {
         'email': currentUser.email,
         'uid': currentUser.uid
       }).then((value) {
-        debugPrint('Usuário salvo no Firestore');
+        logger.i('Usuário salvo no Firestore');
       });
     } on FirebaseException catch (e) {
       debugPrint('Exception ${e.message} ocurred');
@@ -39,7 +41,23 @@ class FirestoreService {
       });
       return user;
     } on FirebaseException catch (e) {
-      debugPrint('Exception ${e.message} ocurred on fetch userFromFirebase');
+      logger.d('Exception ${e.message} ocurred on fetch userFromFirebase');
+      return null;
+    }
+  }
+
+  Future<void> updateUserData(
+      {String name, String email, String userId}) async {
+    try {
+      _firestore
+          .collection(collectionName)
+          .where('uid', isEqualTo: userId)
+          .get()
+          .then((QuerySnapshot querySnapshot) {
+        logger.i(querySnapshot);
+      });
+    } on FirebaseException catch (e) {
+      logger.e(e.message);
     }
   }
 }

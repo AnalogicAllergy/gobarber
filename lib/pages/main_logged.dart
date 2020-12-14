@@ -54,7 +54,7 @@ class MainLogged extends StatelessWidget {
                         width: 56,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(28),
-                            image: DecorationImage(
+                            image: const DecorationImage(
                                 image: NetworkImage(
                                     'https://scontent.fbsb14-1.fna.fbcdn.net/v/t1.0-9/120108010_933365460487064_6430574191358905958_o.jpg?_nc_cat=105&ccb=2&_nc_sid=09cbfe&_nc_ohc=WPwKswztl3wAX-x3XZk&_nc_ht=scontent.fbsb14-1.fna&oh=cdb41ad918036de28f29f8877e462c23&oe=5FF42199'),
                                 fit: BoxFit.cover)),
